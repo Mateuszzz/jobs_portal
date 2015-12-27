@@ -1,0 +1,52 @@
+/* mixin */
+@mixin margin($left: 25px, $top: 0px, $right: 25px, $bootom: 0px) {
+    margin-left: $left;
+    margin-right: $right;
+    margin-top: $top;
+    margin-bootom: $bootom;
+}
+
+@mixin center{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+}
+
+/* header */
+header{
+    @include margin;
+    
+    /* navbar */
+    .navbar-fluid{
+        @include margin;
+    }
+}
+
+/* content */
+.content{
+    @include center;
+    
+    /* home page */
+    .home{
+        font-size: 22px;
+        text-align: center;
+        
+        .title{
+            font-size: 54px;
+        }
+    }
+}
+
+/* footer */
+footer {
+	background: #F8F8F8;
+    color: #333;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 50px;
+    height: 50px;
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+}
