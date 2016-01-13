@@ -15,5 +15,4 @@ RSpec.describe StaticPagesController, :type => :controller do
       expect(response).to render_template("home")
     end
   end
-
 end

@@ -25,13 +25,46 @@ header{
 
 /* content */
 .content{
-    @include center;
+    
+    .center{
+       @include center; 
+    }
+    
+    h1{
+        margin-bottom: 25px;
+        text-align: center;
+    }
+     
+     /* signup user */
+    .signup{
+        width: 300px;
+        position: absolute;
+        left: 50%;
+        @include margin(-150px, 0px, 0px, 10px);
+    }
+    
+    /* forms */
+    .form-inputs{
+        
+        input:not([type='checkbox']){
+            width: 100% ;
+            margin-bottom: 10px;
+        }
+        
+        label{
+            float: left;
+        }
+    }
+    
+    .form-action{
+        text-align: center;
+        margin-top: 10px;
+    }
     
     /* home page */
     .home{
         font-size: 22px;
         text-align: center;
-        
         .title{
             font-size: 54px;
         }
