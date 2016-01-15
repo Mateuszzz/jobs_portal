@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "users/new.html.haml", :type => :view do
   
   before do
-    user = build(:user) 
+    user = FactoryGirl.build(:user) 
     assign :user, user
     
     render

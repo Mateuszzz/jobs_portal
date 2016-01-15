@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, :type => :model do
    
-  let(:user) { build(:user) }
+  let(:user) { FactoryGirl.build(:user) }
     
   it "is valid with correct data" do
     expect(user).to be_valid
@@ -78,7 +78,7 @@ RSpec.describe User, :type => :model do
   
   it "is invalid with duplicate email address" do
     user.save
-    second_user = build(:user)
+    second_user = FactoryGirl.build(:user)
     expect(second_user).not_to be_valid
   end
 end

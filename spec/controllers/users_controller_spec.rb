@@ -56,7 +56,7 @@ RSpec.describe UsersController, :type => :controller do
   end
 
   describe "GET #show/:id" do
-    let(:user) { create(:user) }
+    let(:user) { FactoryGirl.create(:user) }
     
     before do
       get :show, id: user
@@ -72,7 +72,7 @@ RSpec.describe UsersController, :type => :controller do
   end
 
   describe "GET edit/:id" do
-    let(:user) { create(:user) }
+    let(:user) { FactoryGirl.create(:user) }
     
     before do
       get :edit, id: user
@@ -88,7 +88,7 @@ RSpec.describe UsersController, :type => :controller do
   end
   
   describe "PUT 'update/:id'" do
-    let(:user) { create(:user) }
+    let(:user) { FactoryGirl.create(:user) }
     
     context "when data is valid" do    
       it "redirect to user" do
@@ -114,7 +114,7 @@ RSpec.describe UsersController, :type => :controller do
   end
 
   describe "Delete destroy/:id" do
-    let(:user) { create(:user) }
+    let(:user) { FactoryGirl.create(:user) }
     
     it "redirect to home page" do
       delete :destroy, id: user

@@ -1,0 +1,17 @@
+.center  
+  %h1 Log in
+  
+  .row
+  = form_tag(login_path, method: "post") do 
+
+    .form-inputs
+      .field
+        = label_tag :email
+        = email_field_tag :email, params[:email]
+      
+      .field
+        = label_tag :password
+        = password_field_tag :password
+    
+    .form-action
+      = submit_tag "Log in", class: "btn btn-primary"

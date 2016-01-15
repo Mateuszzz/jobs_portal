@@ -9,4 +9,15 @@ module  UserHelper
     fill_in 'user[password_confirmation]', with: user.password_confirmation
     click_button 'Create My Account'
   end
+  
+  def login(user)
+    visit login_path
+    fill_in 'email', with: user.email
+    fill_in 'password', with: user.password
+    click_button 'Log in'
+  end
+  
+  def logout()
+    click_link 'Log out'
+  end
 end
