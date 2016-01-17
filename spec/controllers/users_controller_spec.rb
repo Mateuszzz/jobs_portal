@@ -42,84 +42,145 @@ RSpec.describe UsersController, :type => :controller do
   end
   
   describe "GET #index" do
-    before do
-      get :index
+    
+    context 'when user is logged in' do
+      before do
+        user = FactoryGirl.create(:user)
+        login(user)
+        get :index
+      end
+      
+      it "returns http success" do
+        expect(response).to be_success
+      end
+    
+      it "renders the index template" do
+        expect(response).to render_template(:index)
+      end
     end
     
-    it "returns http success" do
-      expect(response).to be_success
-    end
-    
-    it "renders the index template" do
-      expect(response).to render_template(:index)
+    context 'when user is not logged in' do
+      it "redirect to login path" do
+        get :index
+        
+        expect(response).to redirect_to(login_path)
+      end
     end
   end
 
   describe "GET #show/:id" do
     let(:user) { FactoryGirl.create(:user) }
     
-    before do
-      get :show, id: user
-    end
+    context 'when user is logged in' do
+      before do
+        login(user)
+        get :show, id: user
+      end
+      
+      it "returns http success" do
+        expect(response).to be_success
+      end
     
-    it "returns http success" do
-      expect(response).to be_success
-    end
+      it "renders the show template" do
+        expect(response).to render_template(:show)
+      end
+    end  
     
-    it "renders the show template" do
-      expect(response).to render_template(:show)
+    context 'when user is not logged in' do
+      it "redirect to login path" do
+        get :show, id: user
+        
+        expect(response).to redirect_to(login_path)
+      end
     end
   end
 
   describe "GET edit/:id" do
     let(:user) { FactoryGirl.create(:user) }
     
-    before do
-      get :edit, id: user
+    context 'when user is logged in' do
+      before do
+        login(user)
+        get :edit, id: user
+      end
+    
+      it "returns http success" do
+        expect(response).to be_success
+      end
+    
+      it "renders the edit template" do
+        expect(response).to render_template(:edit)
+      end
     end
     
-    it "returns http success" do
-      expect(response).to be_success
-    end
-    
-    it "renders the edit template" do
-      expect(response).to render_template(:edit)
-    end
+    context 'when user is not logged in' do
+      it "redirect to login path" do
+        get :show, id: user
+        
+        expect(response).to redirect_to(login_path)
+      end
+    end  
   end
   
   describe "PUT 'update/:id'" do
     let(:user) { FactoryGirl.create(:user) }
     
-    context "when data is valid" do    
-      it "redirect to user" do
-        put :update, id: user, user: attributes_for(:user, first_name: "John")
+    context 'with valid data' do
+         
+      context "when user is logged in" do
+        it "redirect to user" do
+          login(user)
+          put :update, id: user, user: attributes_for(:user, first_name: "John")
+          
+          expect(response).to redirect_to(@user)
+        end
+      end
+    
+      context "when user is not logged in" do
+        it "redirect to user" do
+          put :update, id: user, user: attributes_for(:user, first_name: "John")
         
-        expect(response).to redirect_to(user)
+          expect(response).to redirect_to(login_path)
+        end 
       end
     end
     
-    context "when data is invalid" do
-      before do
-        put :update, id: user, user: attributes_for(:user, first_name: "")
-      end
+    context 'with invalid data' do
+      context "when user is logged in" do
+        before do
+          login(user)
+          put :update, id: user, user: attributes_for(:user, first_name: "")
+        end
         
-      it "returns http success" do
-        expect(response).to be_success
+        it "returns http success" do
+          expect(response).to be_success
+        end
+        
+        it "renders the new template" do
+          expect(response).to render_template(:edit)
+        end
       end
-      
-      it "renders the new template" do      
-        expect(response).to render_template(:edit)
-      end
-    end
+    end  
   end
 
   describe "Delete destroy/:id" do
     let(:user) { FactoryGirl.create(:user) }
     
-    it "redirect to home page" do
-      delete :destroy, id: user
+    context 'when user is logged in' do
+      it "redirect to home page" do
+        login(user)
+        delete :destroy, id: user
       
-      expect(response).to redirect_to(root_path)
+        expect(response).to redirect_to(root_path)
+      end
+    end
+    
+    context 'when user is not logged in' do
+      it "redirect to login page" do
+        delete :destroy, id: user
+      
+        expect(response).to redirect_to(login_path)
+      end
     end
   end  
 end

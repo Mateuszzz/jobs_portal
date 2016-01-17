@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :authorize, except: [:new, :create]
+  before_action :check_user, except: [:new, :create, :index]
   
   def index
     @users = User.all
@@ -16,6 +18,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     
     if @user.save
+        session[:user_id] = @user.id
         flash[:success] = "Signup Successful!"
         redirect_to @user
     else
@@ -32,7 +35,7 @@ class UsersController < ApplicationController
     
     if @user.update_attributes(user_params)
       
-      flash[:success] = "Profile updated"
+      flash[:success] = "Profile successfully updated"
       redirect_to @user
     else
       render 'edit'
@@ -42,7 +45,7 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     @user.destroy
-    flash[:success] = "User was successfully destroyed."
+    flash[:success] = "User successfully destroyed."
     redirect_to root_path
   end
   
@@ -50,5 +53,13 @@ class UsersController < ApplicationController
   
   def user_params
       params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :role)
+  end
+  
+  def check_user
+    @user = User.find(params[:id])
+    
+    unless @user == current_user
+      redirect_to current_user
+    end
   end
 end

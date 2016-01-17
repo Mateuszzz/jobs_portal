@@ -11,13 +11,32 @@ module  UserHelper
   end
   
   def login(user)
-    visit login_path
-    fill_in 'email', with: user.email
-    fill_in 'password', with: user.password
-    click_button 'Log in'
+    if controller_test?
+      request.session[:user_id] = user.id  
+
+    else
+      visit login_path
+      fill_in 'email', with: user.email
+      fill_in 'password', with: user.password
+      click_button 'Log in'
+    end
   end
   
   def logout()
     click_link 'Log out'
+  end
+  
+  def edit_profile(user)
+    click_link('Edit profile')
+    fill_in 'user[first_name]', with: user.first_name
+    fill_in 'user[last_name]', with: user.last_name
+    fill_in 'user[email]', with: user.email
+    fill_in 'user[password]', with: "new_password"
+    fill_in 'user[password_confirmation]', with: "new_password"
+    click_button 'Save changes'
+  end
+  
+  def controller_test?
+      defined?(request)
   end
 end
