@@ -8,7 +8,7 @@ feature 'User profile edit' do
     login(user)
     edit_profile(user)
     
-    expect(page).to have_content "Profile successfully updated"
+    expect(page).to have_content("Profile successfully updated")
   end
   
   scenario 'with invalid data' do

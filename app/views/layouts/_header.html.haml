@@ -2,11 +2,11 @@
   %nav.navbar.navbar-default
     .navbar-fluid
       .navbar-header
-        %a{ href: '#', class: 'navbar-brand' } Easy-Hire
+        = link_to "Easy-Hire", root_path, class: 'navbar-brand'
       .navbar-collapse.collapse#navbar
         %ul.nav.navbar-nav
           %li
-            %a{ href: '#'} Home
+            = link_to "Home", root_path
         %ul.nav.navbar-nav.navbar-right
           - if current_user
             %li

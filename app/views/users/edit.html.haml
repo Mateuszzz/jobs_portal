@@ -1,3 +1,8 @@
 .user-form
   %h1 Edit profile      
   = render 'form', locals: {button: "Save changes"}
+  
+  .line
+    %hr
+  .delete-user
+    = link_to "Delete your account", @user, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger"

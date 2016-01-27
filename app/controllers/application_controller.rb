@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
   def log_out
     session.delete(:user_id)
     @current_user = nil
-    flash[:danger] = "Logout Successful!"
+    flash[:success] = "Logout Successful!"
     redirect_to root_path
   end 
 end

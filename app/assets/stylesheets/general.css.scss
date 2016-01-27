@@ -34,6 +34,14 @@ header{
         margin-bottom: 25px;
         text-align: center;
     }
+    
+    .line{
+        hr {
+            color: gray;
+            background: gray;
+            height: 2px;
+        }
+    }
      
      /* user form */
     .user-form{
@@ -41,6 +49,10 @@ header{
         position: absolute;
         left: 50%;
         @include margin(-150px, 0px, 0px, 10px);
+    }
+    
+    .delete-user{
+        text-align: center;
     }
     
     /* forms */
