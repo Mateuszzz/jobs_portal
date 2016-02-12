@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   before_validation :default_values, on: :create
   
+  has_many :jobs
+  
   ROLES = %w[user admin]
   
   has_secure_password
