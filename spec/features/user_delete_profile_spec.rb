@@ -1,6 +1,6 @@
 require 'rails_helper'
  
-feature 'User profile delete' do
+feature 'User delete profile' do
   
   let(:user) { FactoryGirl.create(:user) } 
   

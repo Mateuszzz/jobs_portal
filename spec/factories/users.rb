@@ -7,6 +7,10 @@ FactoryGirl.define do
     password "password"
     password_confirmation "password"
     
+    trait :admin do
+      role "admin"
+    end
+    
     factory :user_with_jobs do
       transient do
         jobs_count 1

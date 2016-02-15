@@ -17,7 +17,7 @@ RSpec.describe UsersController, :type => :controller do
   end
   
   describe "Post #create" do
-    
+   
     context 'when data is valid' do  
       it "redirect to user" do
         post :create, user: attributes_for(:user)

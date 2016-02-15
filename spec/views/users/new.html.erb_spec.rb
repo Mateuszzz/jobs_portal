@@ -13,7 +13,7 @@ RSpec.describe "users/new.html.haml", :type => :view do
     expect(view).to render_template(:partial => "_form")
   end
   
-  it 'displays a form to create a new user' do
+  it 'displays a form to create a new category' do
     expect(rendered).to have_tag('form', :with => { :action => '/users', :method => 'post' }) do
       with_tag "input", :with => { :name => "user[first_name]", :type => 'text' }
       with_tag "input", :with => { :name => "user[last_name]", :type => 'text' }

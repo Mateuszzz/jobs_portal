@@ -1,0 +1,12 @@
+.row
+  = form_for(@category) do |f|
+
+    = render 'shared/error_communicat', object: f.object
+
+    .form-inputs
+      .field
+        = f.label :name
+        = f.text_field :name
+    
+    .form-action
+      = f.submit locals[:button], class: "btn btn-success"

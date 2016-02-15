@@ -36,6 +36,13 @@ module  UserHelper
     click_button 'Save changes'
   end
   
+  def create_category(category)
+    click_link('Categories')
+    click_link('New category')
+    fill_in 'category[name]', with: category.name
+    click_button 'Create category'
+  end
+  
   def controller_test?
       defined?(request)
   end
